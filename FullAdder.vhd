@@ -31,15 +31,15 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity FullAdder is
+entity Adder is
     Port ( A : in STD_LOGIC;
            B : in STD_LOGIC;
            Cin : in STD_LOGIC;
            Y : out STD_LOGIC;
            Cout : out STD_LOGIC);
-end FullAdder;
+end Adder;
 
-architecture FullAdder of FullAdder is
+architecture Adder of Adder is
 
 
 
@@ -49,4 +49,4 @@ begin
         Y <= A xor B xor Cin;
         Cout <= ((A xor B) and Cin) or (A and B);      
 end process;
-end FullAdder;
+end Adder;
