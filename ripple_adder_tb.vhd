@@ -41,41 +41,40 @@ architecture tb of ripple_adder_tb is
 component ripple_adder is
     Port ( A : in STD_LOGIC_VECTOR (3 downto 0);
            B : in STD_LOGIC_VECTOR (3 downto 0);
-           Cin : in STD_LOGIC;
+           Cin_fa : in STD_LOGIC;
            Y : out STD_LOGIC_VECTOR (3 downto 0);
            Cout : out STD_LOGIC);
+           --Cout : out STD_LOGIC_VECTOR (3 downto 0));
 end component;
 
-       signal A_tb : STD_LOGIC_VECTOR (3 downto 0) := "0000";
-       signal B_tb : STD_LOGIC_VECTOR (3 downto 0):= "0000";
+       signal A_tb : STD_LOGIC_VECTOR (3 downto 0):="0000";
+       signal B_tb : STD_LOGIC_VECTOR (3 downto 0):= "0101";
+       signal Cout_tb : STD_LOGIC; --_VECTOR (3 downto 0);
+       signal Y_tb : STD_LOGIC_VECTOR (3 downto 0);
        signal Cin_tb : STD_LOGIC := '0';
-       signal Cout_tb : STD_LOGIC := '0';
-       signal Y_tb : STD_LOGIC_VECTOR (3 downto 0):= "0000";
 begin
 
 adder_A_proc: process
     begin
+    
     wait for 4 ns;
-           A_tb <= STD_LOGIC_VECTOR (unsigned(A_tb) + 1);
-    end process adder_A_proc;
+           A_tb <= STD_LOGIC_VECTOR(unsigned(A_tb) + 1);
+     end process;  
 
 adder_B_proc: process
     begin
-    wait for 64 ns;
-           B_tb <= STD_LOGIC_VECTOR (unsigned(B_tb) + 1);
-    end process adder_B_proc;    
     
-adder_C_proc: process
-    begin
-    wait for 2 ns;
-           Cin_tb <= not Cin_tb;
-    end process adder_C_proc;       
-    
-    ra: ripple_adder
+    --wait for 64 ns;
+    --       B_tb <= STD_LOGIC_VECTOR(unsigned(B_tb) + 1);
+     end process; 
+
+ra: ripple_adder
         port map(
+            Cin_fa => Cin_tb,
             A => A_tb,
             B => B_tb,
-            Cin => Cin_tb,
             Y => Y_tb,
             Cout => Cout_tb);
-end tb;
+            
+       
+end;

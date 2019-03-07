@@ -41,12 +41,16 @@ end Adder;
 
 architecture Adder of Adder is
 
-
+signal temp1, temp2, temp3 : STD_LOGIC;
 
 begin
-    process (A,B)
+    process (A,B,Cin)
     begin
-        Y <= A xor B xor Cin;
-        Cout <= ((A xor B) and Cin) or (A and B);      
+        Y <= (A xor B) xor Cin;
+        --temp1 <= A xor B;
+        --temp2 <= temp1 and Cin;
+        --temp3 <= A and B;
+        Cout <= (((A xor B) and Cin) or (A and B)); 
+        --Cout <= temp2 or temp3;     
 end process;
 end Adder;
